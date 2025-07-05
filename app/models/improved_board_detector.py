@@ -3,6 +3,7 @@ import numpy as np
 from typing import List, Optional, Tuple
 from app.models.board_detector import BoardDetector
 from app.models.validated_board_detector import ValidatedBoardDetector
+from app.models.perspective_board_detector import PerspectiveBoardDetector
 from app.core.exceptions import BoardDetectionError
 
 
@@ -12,15 +13,29 @@ class ImprovedBoardDetector:
     """
     
     def __init__(self):
+        self.perspective_detector = PerspectiveBoardDetector()
         self.validated_detector = ValidatedBoardDetector()
         self.original_detector = BoardDetector()
         self.prefer_validated = True
+        self.enable_perspective = True
         
     def detect_board(self, image: np.ndarray, debug: bool = False) -> np.ndarray:
         """
-        Detect chess board with validation and fallback
+        Detect chess board with validation, perspective correction, and fallback
         """
-        # First try validated detector
+        # First try perspective-aware detector if enabled
+        if self.enable_perspective and self.prefer_validated:
+            try:
+                board = self.perspective_detector.detect_board(image, debug=debug)
+                if debug:
+                    print("✅ Used perspective detector")
+                return board
+            except BoardDetectionError as e:
+                if debug:
+                    print(f"⚠️  Perspective detector failed: {e}")
+                    print("   Trying validated detector...")
+        
+        # Try validated detector
         if self.prefer_validated:
             try:
                 board = self.validated_detector.detect_board(image, debug=debug)
@@ -39,25 +54,37 @@ class ImprovedBoardDetector:
                 print("✅ Used original detector (fallback)")
             return board
         except BoardDetectionError as e:
-            # If both fail, provide more informative error
+            # If all fail, provide informative error
             raise BoardDetectionError(
-                f"Both detectors failed. Validated: {str(e)}, "
-                f"Original: Board detection failed"
+                f"All detectors failed. Last error: {str(e)}"
             )
     
     def extract_squares(self, board_image: np.ndarray) -> List[np.ndarray]:
         """Extract 64 individual square images from the board"""
-        # Both detectors use the same extraction method
-        return self.validated_detector.extract_squares(board_image)
+        # All detectors use the same extraction method
+        return self.perspective_detector.extract_squares(board_image)
     
     def set_validation_threshold(self, threshold: float):
         """Adjust the validation threshold"""
         self.validated_detector.min_score_threshold = threshold
+        self.perspective_detector.min_score_threshold = threshold
     
     def disable_smart_margins(self):
         """Disable smart margin detection"""
         self.validated_detector.apply_smart_margins = False
+        self.perspective_detector.apply_smart_margins = False
     
     def enable_smart_margins(self):
         """Enable smart margin detection"""
         self.validated_detector.apply_smart_margins = True
+        self.perspective_detector.apply_smart_margins = True
+    
+    def disable_perspective_correction(self):
+        """Disable perspective correction"""
+        self.enable_perspective = False
+        self.perspective_detector.enable_perspective_correction = False
+    
+    def enable_perspective_correction(self):
+        """Enable perspective correction"""
+        self.enable_perspective = True
+        self.perspective_detector.enable_perspective_correction = True
