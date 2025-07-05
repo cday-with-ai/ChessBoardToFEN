@@ -68,11 +68,13 @@ class ValidatedBoardDetector:
         # Select best candidate above threshold
         best_corners = None
         best_score = 0
+        best_details = {}
         
         for corners, score, details in scored_candidates:
             if score >= self.min_score_threshold:
                 best_corners = corners
                 best_score = score
+                best_details = details
                 break
         
         if best_corners is None:
@@ -94,17 +96,29 @@ class ValidatedBoardDetector:
         # Apply smart margin detection if enabled
         if self.apply_smart_margins:
             try:
-                margins = self.margin_detector.detect_board_margins(board_image)
-                if debug:
-                    print(f"Detected margins: {margins}")
+                # Check if this looks like a clean digital board
+                # High confidence + good checkerboard pattern = likely clean
+                is_clean_digital = (
+                    best_score > 0.7 and 
+                    best_details.get('checkerboard_pattern', 0) > 0.6 and
+                    best_details.get('ui_elements', 0) < 0.1
+                )
                 
-                # Only apply if significant margins detected
-                if any(m > 10 for m in margins.values()):
-                    board_image = self.margin_detector.apply_smart_crop(board_image, margins)
-                    # Resize again to ensure square
-                    height, width = board_image.shape[:2]
-                    size = min(height, width)
-                    board_image = cv2.resize(board_image, (size, size))
+                if not is_clean_digital:
+                    margins = self.margin_detector.detect_board_margins(board_image)
+                    if debug:
+                        print(f"Detected margins: {margins}")
+                    
+                    # Only apply if significant margins detected
+                    margin_threshold = 20  # Require at least 20 pixels to crop
+                    if any(m > margin_threshold for m in margins.values()):
+                        board_image = self.margin_detector.apply_smart_crop(board_image, margins)
+                        # Resize again to ensure square
+                        height, width = board_image.shape[:2]
+                        size = min(height, width)
+                        board_image = cv2.resize(board_image, (size, size))
+                elif debug:
+                    print("Skipping margin detection for clean digital board")
             except Exception as e:
                 if debug:
                     print(f"Smart margin detection failed: {e}")

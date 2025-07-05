@@ -31,9 +31,18 @@ class SmartMarginDetector:
         }
         
         # Validate margins aren't too aggressive
-        max_margin = min(h, w) * 0.15  # Don't crop more than 15% from any side
+        max_margin = min(h, w) * 0.10  # Don't crop more than 10% from any side
         for side in margins:
             margins[side] = min(margins[side], int(max_margin))
+            
+        # For clean digital boards, ensure margins are symmetric
+        # If margins are very small and uneven, likely false positives
+        if max(margins.values()) < 15:
+            # Small margins detected, check if they're noise
+            margin_variance = np.var([margins['top'], margins['bottom'], margins['left'], margins['right']])
+            if margin_variance > 25:  # High variance in small margins = likely noise
+                # Reset to zero
+                margins = {'top': 0, 'bottom': 0, 'left': 0, 'right': 0}
         
         return margins
     
