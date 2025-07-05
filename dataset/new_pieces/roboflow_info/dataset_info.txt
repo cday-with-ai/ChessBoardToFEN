@@ -1,0 +1,11 @@
+
+    The Roboflow Chess Pieces dataset contains:
+    - 292 images with 2894 annotations
+    - 12 classes: white/black × king/queen/bishop/knight/rook/pawn
+    - Various board angles and lighting conditions
+    
+    To download the full dataset:
+    1. Visit: https://public.roboflow.com/object-detection/chess-full
+    2. Choose format (e.g., YOLOv5 PyTorch)
+    3. Download will include images and annotations
+    
