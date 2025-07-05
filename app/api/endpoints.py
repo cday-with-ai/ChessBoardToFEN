@@ -14,6 +14,7 @@ from app.core.config import settings
 from app.core.exceptions import BoardDetectionError, InvalidImageError
 from app.utils.image_utils import load_image_from_bytes
 from app.models.board_detector import BoardDetector
+from app.models.improved_board_detector import ImprovedBoardDetector
 from app.models.piece_classifier import PieceClassifier
 from app.models.adaptive_board_processor import AdaptiveBoardProcessor
 from app.models.fen_builder import build_fen_from_squares
@@ -22,7 +23,7 @@ from app.models.fen_builder import build_fen_from_squares
 router = APIRouter(prefix="/api", tags=["chess-recognition"])
 
 # Initialize components
-board_detector = BoardDetector()
+board_detector = ImprovedBoardDetector()  # Using improved detector with validation and fallback
 piece_classifier = PieceClassifier()
 adaptive_processor = AdaptiveBoardProcessor()
 

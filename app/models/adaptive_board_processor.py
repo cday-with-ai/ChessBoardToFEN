@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from typing import Tuple, List, Optional
 from app.models.board_detector import BoardDetector
+from app.models.improved_board_detector import ImprovedBoardDetector
 from app.models.piece_classifier import PieceClassifier
 from app.models.image_type_classifier import ImageTypeClassifier, ImageType
 from app.utils.image_utils import four_point_transform, resize_image
@@ -15,7 +16,7 @@ class AdaptiveBoardProcessor:
     
     def __init__(self):
         self.image_classifier = ImageTypeClassifier()
-        self.board_detector = BoardDetector()
+        self.board_detector = ImprovedBoardDetector()  # Using improved detector
         self.piece_classifier = PieceClassifier()
     
     def process_image(self, image: np.ndarray) -> Tuple[List[Tuple[str, float]], dict]:
@@ -25,7 +26,6 @@ class AdaptiveBoardProcessor:
         """
         # Step 1: Classify image type
         image_type, type_confidence, features = self.image_classifier.classify_image(image)
-        print(f"Detected image type: {image_type.value} (confidence: {type_confidence:.2f})")
         
         # Step 2: Get preprocessing parameters
         params = self.image_classifier.get_preprocessing_params(image_type)
