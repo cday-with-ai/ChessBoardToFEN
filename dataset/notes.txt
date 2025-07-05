@@ -1,0 +1,12 @@
+Example usage:
+
+./add_position.py \
+--image "/Users/carsonday/Desktop/word-image-27.png" \
+--fen "4k3/R7/8/3KP3/8/8/8/7r w – -" \
+--description "Endgame position from ragchess.com"
+
+
+curl -X POST "http://localhost:8000/api/recognize-position/debug" \
+    -H "Content-Type: multipart/form-data" \
+    -F "file=@dataset/images/84.png" \
+    | jq

@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+
+# Testing
+tests/
+test_*.py
+pytest_cache/
+.coverage
+
+# Dataset (we'll mount it as volume)
+dataset/images/
+
+# MacOS
+.DS_Store

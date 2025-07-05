@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# PyTorch
+*.pth
+*.pt
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+training_data/
+training_data_clean/squares/
+dataset_report/*_analysis.png
+dataset_report/quick_results.json
+models/*.pth
+*.log
+debug_output.json
+
+# Test outputs
+square_*.png
+*_test.png
+training_history.png
+prediction_visualization.png
+board_detection_test.png
+image_classification_results.png
+board_extraction_diagnosis.png
+
+# Large files
+dataset/images/*.jpeg
+dataset/images/*.jpg
+dataset/images/*.png
+dataset/images/*.webp
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

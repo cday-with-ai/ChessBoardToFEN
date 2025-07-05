@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  chess-recognition:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/models/piece_classifier.h5
+      - MAX_IMAGE_SIZE=10485760  # 10MB
+      - CONFIDENCE_THRESHOLD=0.8
+    volumes:
+      - ./models:/app/models:ro
+      - ./dataset:/app/dataset:ro  # Mount dataset for testing
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

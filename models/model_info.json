@@ -1,0 +1,24 @@
+{
+  "classes": [
+    "B",
+    "K",
+    "N",
+    "P",
+    "Q",
+    "R",
+    "b",
+    "empty",
+    "k",
+    "n",
+    "p",
+    "q",
+    "r"
+  ],
+  "num_classes": 13,
+  "input_shape": [
+    64,
+    64,
+    3
+  ],
+  "architecture": "Simple CNN with 3 conv layers"
+}

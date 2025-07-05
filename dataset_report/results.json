@@ -1,0 +1,112 @@
+[
+  {
+    "path": "dataset/images/9.png",
+    "expected_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "1b6/8/1QQQ1Q1Q/4Pnn1/rrq2qn1/6B1/8/b4n2 w KQkq - 0 1",
+    "accuracy": 28.125,
+    "board_detected": true,
+    "avg_confidence": 0.9034895761869848,
+    "visualization": "dataset_report/9_analysis.png"
+  },
+  {
+    "path": "dataset/images/7.png",
+    "expected_fen": "r1bqkb1r/pp2pp1p/2np1np1/8/3PP3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 0 7",
+    "image_type": "photo_overhead",
+    "type_confidence": 0.5,
+    "actual_fen": "B7/1QK5/1n3Qq1/3p4/1q1nb2B/8/4B3/1B5R w KQkq - 0 1",
+    "accuracy": 42.1875,
+    "board_detected": true,
+    "avg_confidence": 0.886057160096243,
+    "visualization": "dataset_report/7_analysis.png"
+  },
+  {
+    "path": "dataset/images/8.png",
+    "expected_fen": "r1b1kb1r/pp1qpp2/2np1np1/7p/3PPB1P/2NQ1N2/PPP2PP1/R3KB1R b KQkq - 3 9",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "P7/6QQ/8/2q5/8/8/7B/7p w KQkq - 0 1",
+    "accuracy": 45.3125,
+    "board_detected": true,
+    "avg_confidence": 0.9628123305737972,
+    "visualization": "dataset_report/8_analysis.png"
+  },
+  {
+    "path": "dataset/images/10.png",
+    "expected_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "8/BN2QQ2/1R1P4/8/8/Q7/8/1Q2Q3 w KQkq - 0 1",
+    "accuracy": 45.3125,
+    "board_detected": true,
+    "avg_confidence": 0.9723784537054598,
+    "visualization": "dataset_report/10_analysis.png"
+  },
+  {
+    "path": "dataset/images/3.jpeg",
+    "expected_fen": "r4bkr/pppqR1pp/2n5/6N1/2pp2P1/5Q2/PPP2P1P/R1B3K1 w - - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "3nK3/b1R5/1QR5/8/1R6/8/5Q2/8 w KQkq - 0 1",
+    "accuracy": 54.6875,
+    "board_detected": true,
+    "avg_confidence": 0.9217232984956354,
+    "visualization": "dataset_report/3_analysis.png"
+  },
+  {
+    "path": "dataset/images/2.jpeg",
+    "expected_fen": "5b2/5k2/5p2/3p4/1P1PbB2/2Pq2P1/1KN5/4Q3 w - - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "6q1/q7/8/6Q1/4n2b/4Nb2/3R3b/2N5 w KQkq - 0 1",
+    "accuracy": 64.0625,
+    "board_detected": true,
+    "avg_confidence": 0.9489465788938105,
+    "visualization": "dataset_report/2_analysis.png"
+  },
+  {
+    "path": "dataset/images/5.jpeg",
+    "expected_fen": "R7/1p4p1/7Q/1p1pPp1k/1P6/4P2P/5rPK/8 b - - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "8/N7/1NR5/1P6/8/8/8/8 w KQkq - 0 1",
+    "accuracy": 71.875,
+    "board_detected": true,
+    "avg_confidence": 0.9782548532821238,
+    "visualization": "dataset_report/5_analysis.png"
+  },
+  {
+    "path": "dataset/images/6.jpeg",
+    "expected_fen": "7k/4pK1p/3pP3/2pP4/1p4P1/p6P/7Q/8 w - - 0 1",
+    "image_type": "photo_overhead",
+    "type_confidence": 0.85,
+    "actual_fen": "3R2BB/5b1R/5b2/2p5/2n5/8/3R4/8 w KQkq - 0 1",
+    "accuracy": 73.4375,
+    "board_detected": true,
+    "avg_confidence": 0.9685167539864779,
+    "visualization": "dataset_report/6_analysis.png"
+  },
+  {
+    "path": "dataset/images/1.jpeg",
+    "expected_fen": "8/8/5p2/1k4pp/4K2P/6P1/8/8 w - - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "6q1/q7/8/6Q1/4n2b/4Nb2/3R3b/2N5 w KQkq - 0 1",
+    "accuracy": 78.125,
+    "board_detected": true,
+    "avg_confidence": 0.9489465788938105,
+    "visualization": "dataset_report/1_analysis.png"
+  },
+  {
+    "path": "dataset/images/4.png",
+    "expected_fen": "b2k4/1q6/8/8/3p4/6p1/R1Q5/6K1 w - - 0 1",
+    "image_type": "screenshot",
+    "type_confidence": 0.9,
+    "actual_fen": "b2k4/1q6/8/8/3p4/6p1/R1Q5/6K1 w KQkq - 0 1",
+    "accuracy": 100.0,
+    "board_detected": true,
+    "avg_confidence": 0.9940824713557959,
+    "visualization": "dataset_report/4_analysis.png"
+  }
+]
