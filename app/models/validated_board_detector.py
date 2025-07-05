@@ -620,8 +620,10 @@ class ValidatedBoardDetector:
     def extract_squares(self, board_image: np.ndarray) -> List[np.ndarray]:
         """Extract 64 individual square images from the board"""
         height, width = board_image.shape[:2]
-        square_height = height // 8
-        square_width = width // 8
+        
+        # Use float division for precise positioning
+        square_height = height / 8.0
+        square_width = width / 8.0
         
         squares = []
         
@@ -630,12 +632,26 @@ class ValidatedBoardDetector:
         
         for row in range(8):
             for col in range(8):
-                y1 = row * square_height + margin
-                y2 = (row + 1) * square_height - margin
-                x1 = col * square_width + margin
-                x2 = (col + 1) * square_width - margin
+                # Calculate precise boundaries
+                y1 = int(row * square_height) + margin
+                y2 = int((row + 1) * square_height) - margin
+                x1 = int(col * square_width) + margin
+                x2 = int((col + 1) * square_width) - margin
                 
-                square = board_image[y1:y2, x1:x2]
+                # Ensure boundaries are valid
+                y1 = max(0, y1)
+                x1 = max(0, x1)
+                y2 = min(height, y2)
+                x2 = min(width, x2)
+                
+                if y2 > y1 and x2 > x1:
+                    square = board_image[y1:y2, x1:x2]
+                    # Resize to uniform size to eliminate size variations
+                    square = cv2.resize(square, (64, 64))
+                else:
+                    # Create empty square if extraction failed
+                    square = np.zeros((64, 64, 3), dtype=np.uint8)
+                
                 squares.append(square)
         
         return squares

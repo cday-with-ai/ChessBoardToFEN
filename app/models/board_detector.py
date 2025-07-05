@@ -201,20 +201,35 @@ class BoardDetector:
         Returns squares in FEN order (a8 to h1)
         """
         height, width = board_image.shape[:2]
-        square_height = height // 8
-        square_width = width // 8
+        
+        # Use float division for precise positioning
+        square_height = height / 8.0
+        square_width = width / 8.0
         
         squares = []
         
         # Extract squares row by row (starting from top = rank 8)
         for row in range(8):
             for col in range(8):
-                y1 = row * square_height
-                y2 = (row + 1) * square_height
-                x1 = col * square_width
-                x2 = (col + 1) * square_width
+                # Calculate precise boundaries
+                y1 = int(row * square_height)
+                y2 = int((row + 1) * square_height)
+                x1 = int(col * square_width)
+                x2 = int((col + 1) * square_width)
+                
+                # Ensure we don't exceed board boundaries
+                y2 = min(y2, height)
+                x2 = min(x2, width)
                 
                 square = board_image[y1:y2, x1:x2]
+                
+                # Resize to uniform size to eliminate size variations
+                if square.size > 0:
+                    square = cv2.resize(square, (64, 64))
+                else:
+                    # Create empty square if extraction failed
+                    square = np.zeros((64, 64, 3), dtype=np.uint8)
+                
                 squares.append(square)
         
         return squares
